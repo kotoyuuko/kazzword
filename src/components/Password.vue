@@ -9,10 +9,10 @@
           @input="generate"
         ></el-input>
       </el-form-item>
-      <el-form-item label="记忆密码">
+      <el-form-item label="区分代号">
         <el-input
           v-model="rememberPassword"
-          placeholder="记忆密码"
+          placeholder="区分代号"
           show-password
           @input="generate"
         ></el-input>
@@ -87,14 +87,14 @@ export default {
     onCopy (e) {
       this.$notify({
         title: '成功',
-        message: '这是一条成功的提示消息',
+        message: '密码已复制到剪贴板',
         type: 'success'
       })
     },
     onError (e) {
       this.$notify.error({
         title: '错误',
-        message: '这是一条错误的提示消息'
+        message: '复制失败'
       })
     }
   }
