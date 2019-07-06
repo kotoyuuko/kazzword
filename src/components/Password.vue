@@ -1,31 +1,52 @@
 <template>
   <section id="kazzword">
-    <el-input
-      v-model="masterPassword"
-      placeholder="主密码"
-      show-password
-      @input="generate"
-    ></el-input>
-    <el-input
-      v-model="rememberPassword"
-      placeholder="记忆密码"
-      show-password
-      @input="generate"
-    ></el-input>
-    <el-input
-      placeholder="生成密码"
-      v-model="generatedPassword"
-      :disabled="true"
-    >
-      <el-button
-        slot="append"
-        icon="el-icon-copy-document"
-        v-clipboard:error="onError"
-        v-clipboard:success="onCopy"
-        v-clipboard:copy="generatedPassword"
-        >复制密码</el-button
-      >
-    </el-input>
+    <el-form ref="form" label-width="80px">
+      <el-form-item label="主密码">
+        <el-input
+          v-model="masterPassword"
+          placeholder="主密码"
+          show-password
+          @input="generate"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="记忆密码">
+        <el-input
+          v-model="rememberPassword"
+          placeholder="记忆密码"
+          show-password
+          @input="generate"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="长度">
+        <el-slider
+          v-model="length"
+          :min="8"
+          :max="20"
+          show-input
+          @input="generate"
+        ></el-slider>
+      </el-form-item>
+      <el-form-item label="特殊符号">
+        <el-switch v-model="symbol" @input="generate"></el-switch>
+      </el-form-item>
+      <el-form-item label="生成密码">
+        <el-input
+          placeholder="生成密码"
+          v-model="generatedPassword"
+          :disabled="true"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          icon="el-icon-copy-document"
+          v-clipboard:error="onError"
+          v-clipboard:success="onCopy"
+          v-clipboard:copy="generatedPassword"
+          >复制密码</el-button
+        >
+      </el-form-item>
+    </el-form>
   </section>
 </template>
 
@@ -38,7 +59,9 @@ export default {
     return {
       masterPassword: '',
       rememberPassword: '',
-      generatedPassword: ''
+      generatedPassword: '',
+      symbol: true,
+      length: 10
     }
   },
   methods: {
@@ -52,7 +75,14 @@ export default {
         return
       }
 
-      this.generatedPassword = password(this.masterPassword, this.rememberPassword)
+      let params = {
+        master: this.masterPassword,
+        remember: this.rememberPassword,
+        length: this.length,
+        symbol: this.symbol
+      }
+
+      this.generatedPassword = password(params)
     },
     onCopy (e) {
       this.$notify({
@@ -72,9 +102,4 @@ export default {
 </script>
 
 <style lang="scss">
-#kazzword {
-  .el-input {
-    margin: 10px 0;
-  }
-}
 </style>

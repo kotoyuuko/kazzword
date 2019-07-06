@@ -27,6 +27,7 @@ export default {
     width: 100%;
     text-align: center;
     font-size: 20px;
+    font-weight: bold;
     margin: 20px auto;
   }
 }
