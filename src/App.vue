@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-row type="flex" justify="center">
-      <el-col :span="6">
+      <el-col :xs="22" :sm="12" :md="12" :lg="10" :xl="8">
         <span class="title">kazzword</span>
         <Password></Password>
       </el-col>
