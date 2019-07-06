@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.4.5",
+    "js-md5": "^0.7.3",
     "vue": "^2.6.10",
     "vue-clipboard2": "^0.3.0"
   },
